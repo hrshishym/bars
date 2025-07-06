@@ -1,4 +1,5 @@
 ArrayList<Bar> bars;
+boolean loop_flag = true;
 
 void setup(){
   size(640, 640);
@@ -33,6 +34,25 @@ void mouseClicked(){
   bars.add(bar);
 }
 
+// スペースバーを押すとバーを追加
+void keyPressed(){
+  if (key == ' ') {
+    Bar bar = new Bar();
+    bars.add(bar);
+  }
+  // qを押すと描画を一時停止
+  else if (key == 'q') {
+    if (loop_flag) {
+      loop_flag = false;
+      noLoop(); // 描画を停止
+    } else {
+      loop_flag = true;
+      loop(); // 描画を再開
+    }
+  }
+}
+
+
 class Bar {
   int _r, _g, _b, _a;
   int _height;
@@ -52,4 +72,3 @@ class Bar {
     quad(0, _y + _height, width, _y + _height, width, _y - _height, 0, _y - _height);
   }
 }
-
